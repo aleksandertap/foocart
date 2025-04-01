@@ -1,29 +1,40 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 
 export const CartContext = createContext();
 
-const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [cartCount, setCartCount] = useState(0)
-  
-
-  const addToCart = (meal) => {
-    setCart((prev) => [...prev, meal]);
-    setCartCount((prev) => prev + 1)
+const cartCountReducer = (state, action) => {
+    switch (action.type) {
+      case "add":
+        const doIhaveMeal = state.find((item) => item.id === action.meal.id);
+        if (doIhaveMeal) {
+          return state.map((meal) =>
+            meal.id === action.meal.id
+              ? { ...meal, quantity: meal.quantity + 1 }
+              : meal
+          );
+        } else {
+          return [...state, { ...action.meal, quantity: 1 }];
+        }
+      default:
+        return state;
+    }
   };
 
+const CartProvider = ({ children }) => {
+    const [cart, dispatch] = useReducer(cartCountReducer, []);
+
+    const addToCart = (meal) => {
+        dispatch({ type: "add", meal });
+      };
+
   useEffect(() => {
-    console.log(cart)
-  }, [cart])
+    console.log(cart);
+  }, [cart]);
 
-    
-  
-
+  const cartCount = cart.reduce((sum, next) => sum + next.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, cartCount}}>
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={{ cart, addToCart, cartCount }}>{children}</CartContext.Provider>
   );
 };
 
