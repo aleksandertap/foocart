@@ -1,7 +1,11 @@
+import Headers from "./components/Header.js"
+import Meals from "./components/Meals.js"
+
 const App = () => {
  return (
-    <>
-     <h1>Food Order App</h1>
+  <>
+    <Headers />
+    <Meals />
     </>
   );
 }
