@@ -1,5 +1,9 @@
+import Button from "./UI/Button.js"
+
 const MealItem = (props) => {
   const price = props.meals.price;
+  
+  
 
   return (
     <li className="meal-item">
@@ -12,8 +16,8 @@ const MealItem = (props) => {
           </p>
           <p className="meal-item-description ">{props.meals.description}</p>
         </div>
-        <p>
-          <button className="meal-item-actions">Add to Cart</button>
+        <p className="meal-item-actions">
+          <Button textOnly={false}>Add to Cart</Button>
         </p>
       </article>
     </li>
