@@ -2,6 +2,7 @@ import Headers from "./components/Header.js";
 import Meals from "./components/Meals.js";
 import { useState, useEffect,} from "react";
 import CartProvider from "./store/CartContext.js";
+import Modal from "./components/UI/Modal.js"
 
 
 const App = () => {
@@ -18,7 +19,9 @@ const App = () => {
   }, []);
   return (
       <>
+      
       <CartProvider >
+      <Modal/>
       <Headers />
       <Meals meals = {meals}/>
       </CartProvider>
