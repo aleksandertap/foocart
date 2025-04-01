@@ -1,23 +1,25 @@
 import Button from "./UI/Button.js"
+import {CartContext} from "../store/CartContext.js";
+import { useContext } from "react";
 
 const MealItem = (props) => {
-  const price = props.meals.price;
-  
-  
+  const { meals } = props; 
+  const { id, image, name, price, description } = meals;
+  const {addToCart} = useContext(CartContext)
 
   return (
     <li className="meal-item">
       <article>
-        <img src={require(`../assets/${props.meals.image}`)} alt={props.meals.name} />
+        <img src={require(`../assets/${image}`)} alt={name} />
         <div>
-          <h3>{props.meals.name}</h3>
+          <h3>{name}</h3>
           <p className="meal-item-price">
             {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(price)}
           </p>
-          <p className="meal-item-description ">{props.meals.description}</p>
+          <p className="meal-item-description ">{description}</p>
         </div>
         <p className="meal-item-actions">
-          <Button textOnly={false}>Add to Cart</Button>
+          <Button textOnly={false} onClick={() => addToCart(meals)} >Add to Cart</Button>
         </p>
       </article>
     </li>

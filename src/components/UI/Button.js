@@ -5,7 +5,7 @@ const Button = ({textOnly, onClick, children}) => {
   return (
     <button
       className={textOnly ? 'text-button' : 'button'} 
-      onClick={onClick}>
+      onClick={event => onClick(event)}>
       {children}
     </button>
   )

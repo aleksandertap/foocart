@@ -1,10 +1,12 @@
 import Headers from "./components/Header.js";
 import Meals from "./components/Meals.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect,} from "react";
+import CartProvider from "./store/CartContext.js";
 
 
 const App = () => {
   const [meals, setMeals] = useState([]);
+  
 
   useEffect(() => {
     const getMeals = async () => {
@@ -15,11 +17,15 @@ const App = () => {
     getMeals();
   }, []);
   return (
-    <>
+      <>
+      <CartProvider >
       <Headers />
       <Meals meals = {meals}/>
-    </>
+      </CartProvider>
+      </>
+    
   );
+  
 };
 
 export default App;

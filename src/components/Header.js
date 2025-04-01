@@ -1,7 +1,11 @@
 import logo from '../assets/logo.jpg'
 import Button from './UI/Button.js'
+import {CartContext} from '../store/CartContext.js'
+import { useContext } from 'react'
+
 
 const Header = () => {
+    const {cartCount} = useContext(CartContext)
     return (
         <header id="main-header">
             <div id="title">
@@ -9,7 +13,7 @@ const Header = () => {
                 <h1>React Food Order App</h1>
             </div>
             <nav>
-            <Button textOnly={true} >Cart (0)</Button>
+            <Button textOnly={true} >Cart ({cartCount})</Button>
             </nav>
         </header>
     )
