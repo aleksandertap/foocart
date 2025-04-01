@@ -1,33 +1,14 @@
-import {useEffect, useState} from 'react'
-import MealItem from './MealItem.js'
+import { useEffect, useState } from "react";
+import MealItem from "./MealItem.js";
 
-const Meals = () => {
-    const [meals, setMeals] = useState([])
+const Meals = (props) => {
+  return (
+    <ul id="meals">
+      {props.meals.map((meal) => {
+        return <MealItem key={meal.id} meals={meal} />;
+      })}
+    </ul>
+  );
+};
 
-    useEffect(()=>{
-        fetch('http://localhost:3001/meals')
-    .then((response)=>{
-        return response.json()
-    })
-    .then((responseData) => {
-        setMeals(responseData)
-    })
-    
-    },[])
-
-    
-    
-    
-    
-
-    return (
-        <ul id="meals">
-            { 
-            console.log(meals)
-            }
-        </ul>
-    )
-    
-}
-
-export default Meals
+export default Meals;
